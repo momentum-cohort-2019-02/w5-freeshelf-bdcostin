@@ -24,3 +24,9 @@ urlpatterns = [
     path('shelf/', include('shelf.urls')),
     path('', RedirectView.as_view(url='/shelf/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

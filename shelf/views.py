@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shelf.models import Author, Book, Genre
+from shelf.models import Author, Book, Topic
 from django.views import generic
 # Create your views here.
 
@@ -23,6 +23,5 @@ class AuthorListView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     model = Author
 
-class GenreListView(generic.ListView):
-    model = Genre
-    paginate_by = 10
+class TopicListView(generic.ListView):
+    model = Topic
