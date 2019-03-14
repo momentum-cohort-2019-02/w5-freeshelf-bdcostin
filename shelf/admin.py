@@ -5,6 +5,7 @@ from shelf.models import Author, Book, Topic
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'display_author', 'display_topic')
+    exclude = ('slug',)
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):

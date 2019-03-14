@@ -1,28 +1,30 @@
 from django.db import models
 import uuid
 from django.urls import reverse
-from django.utils.text import slugify
-
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
+User = get_user_model()
+
 class Topic(models.Model):
-    '''Model represents the topics'''
+    '''Model represents book topics'''
     name = models.CharField(max_length=100, help_text='Enter a book topic (e.g. Python)')
 
     def __str__(self):
         return self.name
 
 class Book(models.Model):
-    title = models.CharField(max_length=200)
+    '''Model represents books'''
+    title = models.CharField(max_length=255)
     cover = models.ImageField(upload_to='covers/', null=True)
     author = models.ManyToManyField('Author')
     description = models.TextField(max_length=1000)
-    url = models.URLField(max_length=200, null=True)
+    url = models.URLField(max_length=255, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     topic = models.ManyToManyField('Topic', help_text='Select a topic for this book.')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular post across whole site')
-    # slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True)
 
     def get_absolute_url(self):
         '''Returns the url to access details about the book'''
@@ -44,15 +46,15 @@ class Book(models.Model):
         ordering = ['-date_added']
 
 # Overrides current save
-#     def save(self, *args, **kwargs):
-#         self.set_slug()
-#         super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.set_slug()
+        super().save(*args, **kwargs)
 
-# # If not in database then use as is. 
-#     def set_slug(self):
-#         if self.slug:
-#             return
-
+# If not in database then use as is. 
+    def set_slug(self):
+        if self.slug:
+            return
+            
     def __str__(self):
         return self.title
 
@@ -67,7 +69,7 @@ class Author(models.Model):
         return reverse('author-detail', args=[str(self.id)])
 
     # class Meta:
-    #     order = ['last_name', 'first_name']
+    #     order = []
 
     def __str__(self):
         '''String for representing the Model object.'''

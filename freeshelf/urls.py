@@ -15,15 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import RedirectView
+from shelf import views as shelf_views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shelf/', include('shelf.urls')),
-    path('', RedirectView.as_view(url='/shelf/', permanent=True)),
+    path('', shelf_views.index_view),
+    path('accounts/', include('registration.backends.default.urls')),
+
+    path('books/<int:book_pk>/', shelf_views.BookDetailView, name='book_detail'),
+    path('authors/<slug:slug>/',shelf_views.AuthorDetailView, name="author_detail"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Allows images to be uploaded
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

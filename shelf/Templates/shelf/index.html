@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<h2 class="ml3-ns">Recently added:</h2>
+<div class="flex ml5 mr5">
+<div class="flex justify-around">
+  <div class="outline w-25 pa3 mr2">
+    {% comment %} {% if book %}
+        {% for Book in books %}
+        <a href="{% books.url %}">{{ book }}</a>
+        {% endfor %}
+    {% endif %}  {% endcomment %}
+  </div>
+  <div class="outline w-25 pa3 mr2">
+    <code>2</code>
+  </div>
+  <div class="outline w-25 pa3 mr2">
+    <code>3</code>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
