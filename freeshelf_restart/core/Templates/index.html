@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mr3">
+    <ul>
+        <div class="mt4 flex center list pl0">
+            {% if topics %}
+            {% for topic in topics.all %}
+            {% if not forloop.last %}
+            <li><a class="f5 fw6 link black hover-bg-light-yellow" href="{{ topic.get_absolute_url }}">{{ topic.name }} </a></li>
+            <li class="mr2 ml2"> | </li>
+            {% else %}
+            <li><a class="f5 fw6 link black hover-bg-light-yellow" href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </ul>
+
+
+<h2 class="ml6">Recently added:</h2>
+    <ul>
+        <div class="flex flex-wrap ml6 mr6 list pl0">
+            {% if books %}
+            {% for book in books %}
+            <div class="flex flex-column b--solid pv3-ns ph3-ns mr3 mb3 w-25">
+                <li><a class="mr2 f5 fw6 link black hover-bg-light-yellow" href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+                {% if book.author %}
+                <span class="mt3"> by {{ book.author }}</span>
+                {% endif %}
+                <li>
+                    <p>{{ book.description|truncatewords:50 }}</p>
+                </li>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </ul>
+</div>
+{% endblock %}
+
+
+{% comment %} {% for author in book.author.all %}
+<li><a href="{{ author.get_absolute_url }}">{{ Author.name }}</a></li>
+{% endfor %} {% endcomment %}

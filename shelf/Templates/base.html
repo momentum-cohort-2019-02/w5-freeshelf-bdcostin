@@ -17,8 +17,8 @@
                 <nav class="f5 fw6 tracked">
                     <img class="logo" src="{{STATIC_URL}}static/logo-black.png" alt="A silhouette of stacked books">
                     <h1 class="black dib w-15 mr2"><span class="yellow">Free</span>Shelf</h1>
-                    <a class="w-15 mr2 f5 fw6 black link hover-yellow dib ttu" href="0" title="Home">Home</a>
-                    <a class="w-15 mr2 f5 fw6 black link hover-yellow dib ttu" href="#0" title="About">Books</a>
+                    <a class="w-15 mr2 f5 fw6 black link hover-yellow dib ttu" href="{% url 'index' %}" title="Home">Home</a>
+                    <a class="w-15 mr2 f5 fw6 black link hover-yellow dib ttu" href="#0" title="Books">Books</a>
                     <a class="w-15 mr2 f5 fw6 black link hover-yellow dib ttu" href="#0" title="Authors">Authors</a>
                     <a class="w-15 mr2 f5 fw6 black link hover-yellow dib ttu" href="#0" title="Suggest">Suggest Books</a>
                     {% if request.user.is_authenticated %}
@@ -37,8 +37,8 @@
         {% block content %}{% endblock %}
     </div>
 </body>
-<footer class="foot_color bt b--black bw1">
+{% comment %} <footer class="foot_color bt b--black bw1">
 
-</footer>
+</footer> {% endcomment %}
 
 </html>

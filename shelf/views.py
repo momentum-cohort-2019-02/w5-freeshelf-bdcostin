@@ -3,27 +3,49 @@ from shelf.models import Author, Book, Topic
 from django.views import generic
 # Create your views here.
 
-def index_view(request):
+def index(request):
     '''View function for home page of site.'''
 
     topics = Topic.objects.all()
     books = Book.objects.all()
+    authors = Author.objects.all()
 
     context = {
-        'topics': topics,
         'books': books,
+        'topics': topics,
+        'authors': authors,
     }
+
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'shelf/index.html', context=context)
 
-class BookListView(generic.ListView):
+class BookDetailView(generic.DetailView):
     model = Book
-    paginate_by = 10
+    slug_field = 'Book.title'
+    slug_url_kwarg = 'Book.title'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(BookDetailView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['books'] = Book.objects.all()
+        return context
+
     def book_detail_view(self, request, slug):
-        book = get_object_or_404(Book, slug=slug)
+        book = get_object_or_404(Book, pk=primary_key)
         return render(request, 'shelf/book_detail.html', {'book': book})
 
-class BookDetailView(generic.DetailView):
+# class BookListView(generic.ListView):
+#     model = Book
+
+#     def get_context_data(self, **kwargs):
+#         # Call the base implementation first to get the context
+#         context = super(BookListView, self).get_context_data(**kwargs)
+#         # Add in a QuerySet of all the books
+#         context['book_list'] = Book.objects.all()
+#         return context
+
+class BookListView(generic.ListView):
     model = Book
 
 class AuthorListView(generic.ListView):

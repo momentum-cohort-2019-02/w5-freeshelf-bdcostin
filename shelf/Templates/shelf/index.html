@@ -4,22 +4,29 @@
 {% block content %}
 <h2 class="ml3-ns">Recently added:</h2>
 <div class="flex ml5 mr5">
-<div class="flex justify-around">
-  <div class="outline w-25 pa3 mr2">
-    {% comment %} {% if book %}
-        {% for Book in books %}
-        <a href="{% books.url %}">{{ book }}</a>
-        {% endfor %}
-    {% endif %}  {% endcomment %}
-  </div>
-  <div class="outline w-25 pa3 mr2">
-    <code>2</code>
-  </div>
-  <div class="outline w-25 pa3 mr2">
-    <code>3</code>
-  </div>
-</div>
-</div>
-
-
+    <div class="flex justify-around">
+        <div>
+        <ul>
+        {% if books %}
+            {% for book in books %}
+            <li><a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a></li>
+            {% endfor %}
+            {% comment %} {% for author in book.author.all %}
+            <li><a href="{{ author.get_absolute_url }}">{{ Author.name }}</a></li>
+            {% endfor %} {% endcomment %}
+        {% endif %}
+        </ul> 
 {% endblock %}
+
+{% comment %} {% block content %}
+    <h2>Publishers</h2>
+    <ul>
+        {% for publisher in object_list %}
+            <li>{{ publisher.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %} {% endcomment %}
+
+
+
+

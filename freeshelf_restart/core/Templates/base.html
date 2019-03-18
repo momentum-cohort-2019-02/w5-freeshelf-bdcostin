@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+<head>
+    <title>FreeShelf</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block meta %}{% endblock %}
+</head>
+<body class="bg-white">
+    <header>
+        <div class="parent header_color ph3 ph4-m ph5-l bb b--yellow bw1 mb6">
+            <nav class="flex justify-between items-center mw8 center f5 fw6 tracked">
+                <h1 class="black dib w-15 mr2"><span class="yellow">Free</span>Shelf</h1>
+                <a class="w-15 mt3 mr2 f5 fw6 black link hover-yellow dib ttu" href="{% url 'index' %}" title="Home">Home</a>
+                <a class="w-15 mt3 mr2 f5 fw6 black link hover-yellow dib ttu" href="#0" title="Authors">Authors</a>
+                <a class="w-15 mt3 mr2 f5 fw6 black link hover-yellow dib ttu" href="#0" title="Suggest">Suggest Books</a>
+                {% if request.user.is_authenticated %} 
+                <div>
+                    {{ user.username }}
+                </div>
+                <a class="mt3 w-15 ml7 f5 fw6 black link hover-yellow dib" href="{% url 'auth_logout' %}">Logout</a>
+                {% else %}
+                <a class="mt3 w-15 ml7 f5 fw6 black link hover-yellow dib" href="{% url 'auth_login' %}">Register
+                    | Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <div class="mt3 ml6 pb4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

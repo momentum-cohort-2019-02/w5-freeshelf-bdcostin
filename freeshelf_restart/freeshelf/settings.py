@@ -11,18 +11,19 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/covers/'
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p$!^dm8pa7=$^8cho760crx(j3qpbmjzzy6=zmw4*xc_e+)8*v'
+SECRET_KEY = '*x)9c$0c7s(n03_x9&4*sb35-_i=vwkx_6yt57a*p74jj_b*ak'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,15 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', 
+    'django.contrib.staticfiles',
 
-    # is static files need? ^^^
-
-    # Third party apps
-    'debug_toolbar',
-
-    # My Apps
-    'shelf',
+    # My apps
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +57,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'freeshelf.urls'
@@ -69,9 +64,7 @@ ROOT_URLCONF = 'freeshelf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -160,4 +153,5 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Activate Django-Heroku - must be last line. Sets all the correct settings | "Local" returns dictionary of all local variables. 
-django_heroku.settings(locals())
+
+# django_heroku.settings(locals())

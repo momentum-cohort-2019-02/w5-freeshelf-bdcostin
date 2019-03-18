@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<h2 class="ml3-ns">All Books:</h2>
+{% comment %} <div class="flex ml5 mr5">
+    <div class="flex justify-around">
+        <div class="outline w-25 pa3 mr2">
+        <ul>
+        {% if books %}
+            {% for book in books %}
+            <li><a href="{%  url 'books' %}">{{ book }}</a> </li>
+            {% endfor %}
+            {% for author in book.author.all %}
+            <a href="{{ author.get_absolute_url }}">{{ author }}</a>,
+            {% endfor %}
+        {% endif %} {% endcomment %}
